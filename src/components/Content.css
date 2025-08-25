@@ -22,7 +22,7 @@
 }
 
 .dashboard-card {
-  flex: 1 1 calc(33% - 20px); /* 3 columnas, ajustable */
+  flex: 1 1 calc(33% - 20px); 
   background-color: #f5f5f5;
   padding: 20px;
   border-radius: 12px;

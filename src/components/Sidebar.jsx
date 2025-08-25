@@ -113,6 +113,7 @@ function Sidebar({ active, setActive, openSubmenu, setOpenSubmenu, onLogout }) {
             <div className="submenu-modern">
               <button onClick={() => setActive("puestosAdd")}>Registrar Puesto</button>
               <button onClick={() => setActive("departamentosAdd")}>Registrar Departamento</button>
+              <button onClick={() => setActive("resetPassword")}>Generar Contraseña</button>
             </div>
           )}
         </>

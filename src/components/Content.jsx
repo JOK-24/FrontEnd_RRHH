@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./Content.css"; // 👈 importar CSS
+import "./Content.css"; //  importar CSS
 import EmpleadoList from "./empleado/EmpleadoList";
 import RegistrarEmpleado from "./empleado/RegistrarEmpleado";
 import PuestoList from "./puesto/PuestoList";
@@ -8,6 +8,8 @@ import DepartamentoList from "./departamento/DepartamentoList";
 import RegistrarUser from "./usuario/RegistrarUser";
 import UserList from "./usuario/UserList";
 import { i } from "framer-motion/client";
+import UpdatePassword from "./password/UpdatePassword";
+import ResetPassword from "./password/ResetPassword";
 
 function Content({ active }) {
   const [listaEmpleados, setListaEmpleados] = useState([]);
@@ -88,6 +90,8 @@ function Content({ active }) {
       {active === "departamentosList" && <DepartamentoList />}
       {active === "usuariosAdd" && <RegistrarUser />}
       {active === "usuariosList" && <UserList />}
+      {active === "cambiarPassword" && <UpdatePassword />}
+      {active === "resetPassword" && <ResetPassword />}
     </div>
   );
 }
