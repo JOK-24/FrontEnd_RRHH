@@ -1,73 +1,132 @@
 /* Content.css */
 
-/* Contenedor principal del dashboard */
-.dashboard {
-  padding: 20px;
+.flex-grow-1 {
+  width: 100%;
+  height: 100%;
+  padding: 0; /* Removemos el padding aquí porque ya está en .content-modern */
 }
 
-/* Encabezado */
-.dashboard-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 30px;
+.p-3 {
+  padding: 0; /* Removemos este padding también */
 }
 
-/* Cards de información */
-.dashboard-cards {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  margin-bottom: 30px;
+/* Asegurar que todos los componentes usen el espacio completo */
+.dashboard, 
+.empleado-list,
+.puesto-list,
+.departamento-list,
+.usuario-list,
+.permiso-list {
+  width: 100%;
+  height: auto;
+  min-height: 100%;
 }
 
-.dashboard-card {
-  flex: 1 1 calc(33% - 20px); 
-  background-color: #f5f5f5;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  text-align: center;
-  min-width: 200px;
-  transition: transform 0.2s;
-}
-
-.dashboard-card:hover {
-  transform: translateY(-5px);
-}
-
-.dashboard-card h3 {
-  font-size: 18px;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-.dashboard-card p {
-  font-size: 28px;
-  font-weight: bold;
-  margin: 0;
-}
-
-/* Alertas */
-.dashboard-alert {
-  background-color: #ffe5e5;
-  color: #d8000c;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* Estilos para tablas responsivas */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
   margin-bottom: 20px;
 }
 
-.dashboard-alert h4 {
-  margin-bottom: 10px;
+.table {
+  width: 100%;
+  min-width: 600px; /* Ancho mínimo para evitar que se comprima demasiado */
+}
+
+/* Formularios */
+.form-container {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
   font-weight: 600;
 }
 
-.dashboard-alert ul {
-  padding-left: 20px;
-  margin: 0;
+.form-control {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
 }
 
-.dashboard-alert li {
-  margin-bottom: 5px;
+.form-control:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+/* Botones */
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+}
+
+.btn-success {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-success:hover {
+  background-color: #1e7e34;
+}
+
+.btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-danger:hover {
+  background-color: #c82333;
+}
+
+/* Alertas */
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.alert-danger {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.alert-warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border: 1px solid #ffeaa7;
 }

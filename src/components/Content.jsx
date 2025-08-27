@@ -2,14 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./Content.css"; //  importar CSS
 import EmpleadoList from "./empleado/EmpleadoList";
 import RegistrarEmpleado from "./empleado/RegistrarEmpleado";
+//
 import PuestoList from "./puesto/PuestoList";
 import RegistrarPuesto from "./puesto/RegistrarPuesto";
+//
 import DepartamentoList from "./departamento/DepartamentoList";
+import RegistrarDepa from "./departamento/RegistrarDepa";
+//
 import RegistrarUser from "./usuario/RegistrarUser";
 import UserList from "./usuario/UserList";
 import { i } from "framer-motion/client";
+
+import listContratos from "./reporte/ReportesContratos";
+//
+import RegistrarPermiso from "./permiso/RegistrarPermiso";
+import PermisoList from "./permiso/PermisoList";
+import ListarSolicitud from "./permiso/ListarSolicitud";
+import MisSolicitudes from "./permiso/MisSolicitudes"
+//
+import SolicitarPermiso from "./permiso/SolicitarPermiso";
+//
 import UpdatePassword from "./password/UpdatePassword";
 import ResetPassword from "./password/ResetPassword";
+import ReporteContratos from "./reporte/ReportesContratos";
 
 function Content({ active }) {
   const [listaEmpleados, setListaEmpleados] = useState([]);
@@ -88,10 +103,17 @@ function Content({ active }) {
       {active === "puestosList" && <PuestoList />}
       {active === "puestosAdd" && <RegistrarPuesto />}
       {active === "departamentosList" && <DepartamentoList />}
+      {active === "departamentosAdd" && <RegistrarDepa />}
       {active === "usuariosAdd" && <RegistrarUser />}
       {active === "usuariosList" && <UserList />}
+      {active === "listContratos" && <ReporteContratos />}
       {active === "cambiarPassword" && <UpdatePassword />}
+      {active === "permisoAdd" && <RegistrarPermiso />}
+      {active === "permisoList" && <PermisoList />}
+      {active === "solicitudEmpleado" && <ListarSolicitud />}
+      {active === "solicitudAdd" && <SolicitarPermiso />}
       {active === "resetPassword" && <ResetPassword />}
+      {active === "misSolicitudes" && <MisSolicitudes/>}
     </div>
   );
 }

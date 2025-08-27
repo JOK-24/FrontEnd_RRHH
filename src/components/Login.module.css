@@ -1,0 +1,84 @@
+/* src/components/Login.module.css */
+
+.loginContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.loginCard {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+}
+
+.loginTitle {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #fff;
+  margin-bottom: 1.5rem;
+}
+
+.loginCard label {
+  margin-top: 0.5rem;
+  margin-bottom: 0.3rem;
+  color: #fff;
+  font-weight: 500;
+}
+
+.loginCard input {
+  padding: 0.6rem;
+  border-radius: 10px;
+  border: none;
+  margin-bottom: 1rem;
+  outline: none;
+  font-size: 1rem;
+}
+
+.loginCard input:focus {
+  border: 2px solid #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.loginCard button {
+  padding: 0.8rem;
+  border-radius: 12px;
+  border: none;
+  background: #fff;
+  color: #2575fc;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.loginCard button:hover {
+  background: #e0e0e0;
+}
+
+.mensajeAlert {
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.mensajeAlert.success {
+  background-color: rgba(0, 255, 100, 0.2);
+  color: #0f9d58;
+}
+
+.mensajeAlert.error {
+  background-color: rgba(255, 0, 0, 0.2);
+  color: #d93025;
+}

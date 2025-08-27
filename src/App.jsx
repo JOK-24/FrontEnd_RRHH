@@ -8,7 +8,9 @@ function App() {
   const [openSubmenu, setOpenSubmenu] = useState(null);
   const [user, setUser] = useState(
     sessionStorage.getItem("usuario")
-      ? { usuario: sessionStorage.getItem("usuario"), rol: sessionStorage.getItem("rol") }
+      ? { usuario: sessionStorage.getItem("usuario"),
+         rol: sessionStorage.getItem("rol") ,
+        }
       : null
   );
 
@@ -16,12 +18,20 @@ function App() {
   const handleLogout = () => {
     sessionStorage.clear();
   setUser(null);
+  setActive("dashboard"); // 🔥 reset al salir
+    setOpenSubmenu(null);
   };
 
   return (
     <div className="app d-flex">
       {!user ? (
-        <Login onLogin={setUser} />
+        <Login
+          onLogin={(data) => {
+            setUser(data);
+            setActive("dashboard"); // 🔥 reset al entrar
+            setOpenSubmenu(null);
+          }}
+        />
       ) : (
         <>
           <Sidebar
@@ -32,7 +42,11 @@ function App() {
             rol={user.rol}
             onLogout={handleLogout} // 👈 pasamos logout
           />
-          <Content active={active} />
+          <Content 
+  active={active} 
+  rol={user.rol} 
+  usuario={user.usuario} 
+/>
         </>
       )}
     </div>

@@ -1,106 +1,168 @@
-import { useState } from "react";
+    import { useState } from "react";
 
-function Login({ onLogin }) { // 👈 recibe onLogin desde App
-  const [form, setForm] = useState({
-    nombreUsuario: "",
-    contrasena: "",
-  });
-  const [mensaje, setMensaje] = useState("");
-
-  const handleChange = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const response = await fetch("http://localhost:5025/api/Usuario/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(form),
+    function Login({ onLogin }) {
+      const [form, setForm] = useState({
+        nombreUsuario: "",
+        contrasena: "",
       });
+      const [mensaje, setMensaje] = useState("");
 
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "Error al iniciar sesión");
-      }
+      const handleChange = (e) => {
+        setForm({
+          ...form,
+          [e.target.name]: e.target.value,
+        });
+      };
 
-      const data = await response.json();
+      const handleSubmit = async (e) => {
+        e.preventDefault();
 
-      // Guardamos usuario y rol en localStorage
-      sessionStorage.setItem("usuario", data.usuario);
-      sessionStorage.setItem("rol", data.rol);
+        try {
+          const response = await fetch("http://localhost:5025/api/Usuario/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(form),
+          });
 
-      // Notificamos a App que el usuario se logueó
-      onLogin(data);
+          if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText || "Error al iniciar sesión");
+          }
 
-      setMensaje("✅ Inicio de sesión exitoso");
-    } catch (error) {
-      setMensaje(`❌ ${error.message}`);
+          const data = await response.json();
+          console.log("Respuesta del backend:", data);
+
+          // Guardar usuario en sessionStorage
+          sessionStorage.setItem("idUsuario", data.idUsuario);
+          sessionStorage.setItem("idEmpleado", data.idEmpleado);
+          sessionStorage.setItem("usuario", data.usuario);
+          sessionStorage.setItem("rol", data.rol);
+
+          if (onLogin) onLogin(data);
+
+          setMensaje("✅ Inicio de sesión exitoso");
+        } catch (error) {
+          console.error("Error en login:", error);
+          setMensaje(`❌ ${error.message}`);
+        }
+      };
+
+      // 🎨 Estilos
+      const containerStyle = {
+        position: "fixed",
+        top: 0,
+        left: 0,
+        width: "100vw",
+        height: "100vh",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        background: "linear-gradient(135deg, #6a11cb, #2575fc)",
+        fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif",
+        margin: 0,
+        padding: 0,
+        zIndex: 1000,
+      };
+
+      const cardStyle = {
+        background: "rgba(255, 255, 255, 0.15)",
+        backdropFilter: "blur(10px)",
+        padding: "2.5rem",
+        borderRadius: "20px",
+        boxShadow: "0 8px 32px rgba(0, 0, 0, 0.2)",
+        width: "350px",
+        display: "flex",
+        flexDirection: "column",
+      };
+
+      const titleStyle = {
+        textAlign: "center",
+        fontSize: "1.8rem",
+        fontWeight: "bold",
+        color: "#fff",
+        marginBottom: "1.5rem",
+      };
+
+      const labelStyle = {
+        marginTop: "0.5rem",
+        marginBottom: "0.3rem",
+        color: "#fff",
+        fontWeight: "500",
+      };
+
+      const inputStyle = {
+        padding: "0.6rem",
+        borderRadius: "10px",
+        border: "none",
+        marginBottom: "1rem",
+        outline: "none",
+        fontSize: "1rem",
+      };
+
+      const buttonStyle = {
+        padding: "0.8rem",
+        borderRadius: "12px",
+        border: "none",
+        background: "#fff",
+        color: "#2575fc",
+        fontWeight: "bold",
+        fontSize: "1rem",
+        cursor: "pointer",
+        transition: "0.3s",
+      };
+
+      const mensajeStyle = {
+        textAlign: "center",
+        padding: "0.5rem",
+        borderRadius: "8px",
+        marginBottom: "1rem",
+        fontWeight: "500",
+        backgroundColor: mensaje.startsWith("✅")
+          ? "rgba(0, 255, 100, 0.2)"
+          : "rgba(255, 0, 0, 0.2)",
+        color: mensaje.startsWith("✅") ? "#0f9d58" : "#d93025",
+      };
+
+      return (
+        <div style={containerStyle}>
+          <form onSubmit={handleSubmit} style={cardStyle}>
+            <h2 style={titleStyle}>Iniciar Sesión</h2>
+
+            {mensaje && <div style={mensajeStyle}>{mensaje}</div>}
+
+            <label style={labelStyle}>Usuario</label>
+            <input
+              type="text"
+              name="nombreUsuario"
+              value={form.nombreUsuario}
+              onChange={handleChange}
+              placeholder="Ingrese su usuario"
+              required
+              style={inputStyle}
+            />
+
+            <label style={labelStyle}>Contraseña</label>
+            <input
+              type="password"
+              name="contrasena"
+              value={form.contrasena}
+              onChange={handleChange}
+              placeholder="Ingrese su contraseña"
+              required
+              style={inputStyle}
+            />
+
+            <button
+              type="submit"
+              style={buttonStyle}
+              onMouseEnter={(e) => (e.target.style.background = "#e0e0e0")}
+              onMouseLeave={(e) => (e.target.style.background = "#fff")}
+            >
+              Ingresar
+            </button>
+          </form>
+        </div>
+      );
     }
-  };
 
-  return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white shadow-lg rounded-2xl p-8 w-96"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">Iniciar Sesión</h2>
-
-        {mensaje && (
-          <div
-            className={`mb-4 p-2 rounded text-center ${
-              mensaje.startsWith("✅")
-                ? "bg-green-100 text-green-700"
-                : "bg-red-100 text-red-700"
-            }`}
-          >
-            {mensaje}
-          </div>
-        )}
-
-        <div className="mb-4">
-          <label className="block mb-1 font-medium">Usuario</label>
-          <input
-            type="text"
-            name="nombreUsuario"
-            value={form.nombreUsuario}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="Ingrese su usuario"
-            required
-          />
-        </div>
-
-        <div className="mb-6">
-          <label className="block mb-1 font-medium">Contraseña</label>
-          <input
-            type="password"
-            name="contrasena"
-            value={form.contrasena}
-            onChange={handleChange}
-            className="w-full border rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-400"
-            placeholder="Ingrese su contraseña"
-            required
-          />
-        </div>
-
-        <button
-          type="submit"
-          className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-lg transition"
-        >
-          Ingresar
-        </button>
-      </form>
-    </div>
-  );
-}
-
-export default Login;
+    export default Login;

@@ -99,12 +99,26 @@ function Sidebar({ active, setActive, openSubmenu, setOpenSubmenu, onLogout }) {
             </div>
           )}
 
-          <button 
-            className={menuBtnClass(active === "reportes")} 
-            onClick={() => setActive("reportes")}
-          >
-            <FaChartLine className="icon" /> Reportes
+          <button className="menu-btn" onClick={() => toggleSubmenu("permisos")}>
+            <FaClipboardList className="icon" /> Permisos
           </button>
+          {openSubmenu === "permisos" && (
+            <div className="submenu-modern">
+              <button onClick={() => setActive("permisoList")}>Listar</button>
+              <button onClick={() => setActive("permisoAdd")}>Registrar Permisos</button>
+              <button onClick={() => setActive("solicitudEmpleado")}>Listar Solicitudes</button>
+              {/* Aquí luego podrías agregar Listar */}
+            </div>
+          )}
+
+          <button className="menu-btn" onClick={() => toggleSubmenu("reportes")}>
+          <FaChartLine className="icon" /> Reportes
+          </button>
+          {openSubmenu === "reportes" && (
+            <div className="submenu-modern">
+              <button onClick={() => setActive("listContratos")}>Contratos</button>
+            </div>
+          )}
 
           <button className="menu-btn" onClick={() => toggleSubmenu("configuracion")}>
             <FaCog className="icon" /> Configuración
@@ -127,8 +141,8 @@ function Sidebar({ active, setActive, openSubmenu, setOpenSubmenu, onLogout }) {
           </button>
           {openSubmenu === "permisos" && (
             <div className="submenu-modern">
-              <button onClick={() => setActive("permisosList")}>Listar</button>
-              <button onClick={() => setActive("permisosAdd")}>Solicitar</button>
+              <button onClick={() => setActive("misSolicitudes")}>Mis solicitudes</button>
+              <button onClick={() => setActive("solicitudAdd")}>Solicitar Permiso</button>
             </div>
           )}
 
